@@ -13,8 +13,6 @@ import com.example.system.testroom.bd.AppDatabase;
 import com.example.system.testroom.bd.EmployeeDao;
 import com.example.system.testroom.model.Employee;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     private DbAdapter adapter;
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             employeeDao.insert(employee);
             adapter.setData(employeeDao.getAll());
         });
-
 
     }
 }

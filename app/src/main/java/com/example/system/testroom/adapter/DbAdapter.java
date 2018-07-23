@@ -5,9 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.system.testroom.R;
+import com.example.system.testroom.bd.App;
+import com.example.system.testroom.bd.AppDatabase;
+import com.example.system.testroom.bd.EmployeeDao;
 import com.example.system.testroom.model.Employee;
 
 import java.util.List;
@@ -32,6 +36,13 @@ public class DbAdapter extends RecyclerView.Adapter<DbAdapter.ViewHolder> {
         Employee employee = mEmployees.get(position);
         holder.name.setText(employee.getName());
         holder.salary.setText(String.valueOf(employee.getSalary()));
+
+        holder.delete.setOnClickListener(view -> {
+            AppDatabase db = App.getInstance().getDatabase();
+            EmployeeDao employeeDao = db.employeeDao();
+            employeeDao.delete(employee);
+            setData(employeeDao.getAll());
+        });
     }
 
     public void setData(List<Employee> newData) {
@@ -45,13 +56,16 @@ public class DbAdapter extends RecyclerView.Adapter<DbAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         private TextView name;
         private TextView salary;
+        private Button delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.product_name);
             salary = itemView.findViewById(R.id.product_price);
+            delete = itemView.findViewById(R.id.delete_btn);
         }
     }
 }
