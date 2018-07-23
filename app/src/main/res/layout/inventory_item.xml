@@ -23,7 +23,6 @@
                 android:id="@+id/salary"
                 style="@style/card_list_style"
                 android:text="salary" />
-
         </LinearLayout>
 
         <LinearLayout style="@style/linear_list_style">
@@ -35,8 +34,6 @@
             <TextView
                 android:id="@+id/product_price"
                 style="@style/card_list_style_data" />
-
-
         </LinearLayout>
     </LinearLayout>
 
